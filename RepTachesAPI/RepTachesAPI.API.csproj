@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RepTachesAPI.BLL\RepTachesAPI.BLL.csproj" />
+    <ProjectReference Include="..\RepTachesAPI.Domain\RepTachesAPI.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

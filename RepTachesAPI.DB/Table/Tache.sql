@@ -5,8 +5,8 @@
     [NomTache] VARCHAR(50) NOT NULL,
     [Recurrence] VARCHAR(50) DEFAULT 'Non',
     [Priorite] INT DEFAULT '1',
-    [Description] VARCHAR(50),
-    [DateCreation] TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    [Description] VARCHAR(MAX),
+    [DateCreation] DATETIME DEFAULT GetDate(),
     [DateDebut] DATETIME,
     [DateFin] DATETIME,
     [DateEcheance] DATETIME,
@@ -15,7 +15,7 @@
 
     CONSTRAINT [PK_Tache] PRIMARY KEY (IdTache),
 	CONSTRAINT [UC_Tache] UNIQUE (NomTache),
-    CONSTRAINT [FK_Tache_Utilisateur] FOREIGN KEY (IdTache) REFERENCES Utilisateur(IdUtilisateur),
+
 
 
 
@@ -23,10 +23,17 @@
 
 GO
 
-CREATE TRIGGER [dbo].[Trigger_Tache]
+CREATE TRIGGER [dbo].[Trigger_Tache_SolftDelete]
     ON [dbo].[Tache]
-    FOR DELETE, INSERT, UPDATE
+    INSTEAD OF DELETE
     AS
     BEGIN
-        SET NoCount ON
+        SET NOCOUNT ON;
+        DECLARE @IdTache INT;
+        SELECT @IdTache = @IdTache
+        FROM DELETED;
+		UPDATE Tache
+        SET Statut = 0
+        WHERE @IdTache = @IdTache;
     END
+

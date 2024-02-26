@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RepTachesAPI.DB\RepTachesAPI.DB.sqlproj" />
+    <ProjectReference Include="..\RepTachesAPI.Domain\RepTachesAPI.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

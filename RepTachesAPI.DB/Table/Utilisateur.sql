@@ -10,13 +10,30 @@
 	[Email] VARCHAR(50),
 	[Telephone] VARCHAR(50),
 	[Passeword] VARCHAR(50) NOT NULL, 
-	[DateDerniereConnexion] TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	[DateDerniereConnexion] DATETIME DEFAULT GetDate(),
 
 
     CONSTRAINT [PK_Utilisateur] PRIMARY KEY (IdUtilisateur),
 	CONSTRAINT [UC_Utilisateur] UNIQUE (Username), 
-    CONSTRAINT [FK_Utilisateur_Tache] FOREIGN KEY (IdUtilisateur) REFERENCES Tache(IdTache),
+
 
 
 
 )
+
+GO
+
+CREATE TRIGGER [dbo].[Trigger_Utilisateur_SolftDelete]
+    ON [dbo].[Utilisateur]
+    INSTEAD OF DELETE
+    AS
+    BEGIN
+		SET NOCOUNT ON;
+        DECLARE @IdUtilisateur INT;
+        SELECT @IdUtilisateur = IdUtilisateur
+        FROM DELETED;
+		UPDATE Utilisateur
+        SET Statut = 0
+        WHERE IdUtilisateur = @IdUtilisateur;
+    END
+

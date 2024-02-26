@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{2f72ac20-949f-4bf4-8704-e9b9f738904f}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -58,13 +58,23 @@
     <Folder Include="Properties" />
     <Folder Include="Stored Procedure" />
     <Folder Include="Table" />
+    <Folder Include="Views" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Stored Procedure\Stored Procedure.sql" />
     <Build Include="Table\Utilisateur_Tache.sql" />
     <Build Include="Table\Utilisateur.sql" />
+    <Build Include="Stored Procedure\SP_HashPassword.sql" />
+    <Build Include="Views\V_Utilisateur.sql" />
+    <Build Include="Views\V_TacheUtilisateur.sql" />
+    <Build Include="Views\V_TacheAdmin_RapportUtilisateur.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Table\Tache.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RepTachesAPI.DB.publish.xml" />
   </ItemGroup>
 </Project>
