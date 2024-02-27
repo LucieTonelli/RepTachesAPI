@@ -15,4 +15,8 @@
     <ProjectReference Include="..\RepTachesAPI.Domain\RepTachesAPI.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mappers\" />
+  </ItemGroup>
+
 </Project>

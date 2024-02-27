@@ -10,7 +10,7 @@
     [DateDebut] DATETIME,
     [DateFin] DATETIME,
     [DateEcheance] DATETIME,
-    [TachePartagee] BIT DEFAULT '1' NOT NULL,
+    [TachePartagee] BIT DEFAULT '0' NOT NULL,
     [EstComplete] BIT DEFAULT '0' NOT NULL,
 
     CONSTRAINT [PK_Tache] PRIMARY KEY (IdTache),
