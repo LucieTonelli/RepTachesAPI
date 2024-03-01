@@ -12,12 +12,11 @@ namespace RepTachesAPI.BLL.Interfaces
 
 
             IEnumerable<Tache> GetAll();
-            Tache? GetById(int id);
+            Tache? GetById(int IdTache);
             Tache Create(Tache tache);
             Tache? Update(Tache tache);
             Tache? Complete(Tache tache);
             bool Delete(int id);
-    
-
+        Tache GetById(object idTache);
     }
 }

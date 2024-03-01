@@ -21,5 +21,6 @@ namespace RepTachesAPI.Domain.Models
         public string Passeword { get; set; }
 
         public DateTime DateDerniereConnexion { get; set; }
+        public List<Tache> Tache { get; set; }
     }
 }

@@ -19,6 +19,7 @@ builder.Services.AddScoped<IUtilisateurService, UtilisateurService>();
 
 
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

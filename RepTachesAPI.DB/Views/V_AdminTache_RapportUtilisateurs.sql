@@ -1,4 +1,4 @@
-﻿CREATE VIEW [dbo].[V_TacheAdmin_RapportUtilisateur]
+﻿CREATE VIEW [dbo].[V_AdminTache_RapportUtilisateurs]
 AS
 SELECT 
     U.IdUtilisateur,

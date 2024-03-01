@@ -1,21 +1,65 @@
-﻿using RepTachesAPI.DAL.Interfaces;
+﻿using Microsoft.Extensions.Configuration;
+using RepTachesAPI.DAL.Interfaces;
+using RepTachesAPI.DAL.Tools;
 using RepTachesAPI.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RepTachesAPI.DAL.Repositories
 {
     public class TacheRepository : ITacheRepository
     {
-        public Tache? Complete(Tache tache)
+        private readonly string _connectionString;
+
+        private IConnection _connection;
+        public TacheRepository(IConfiguration config)
         {
-            throw new NotImplementedException();
+            _connectionString = config.GetConnectionString("default");
+            _connection = new Connection(_connectionString);
         }
 
-        public Tache Create(Tache tache)
+        public Tache? Create(Tache tache)
+        {
+            Command cmd = new Command("CreateTache", true);
+            cmd.AddParameter("NomTache", tache.NomTache);
+            cmd.AddParameter("Recurrence", tache.Recurrence);
+            cmd.AddParameter("Priorite", tache.Priorite);
+            cmd.AddParameter("Description", tache.Description);
+            cmd.AddParameter("DateCreation", tache.DateCreation);
+            cmd.AddParameter("DateDebut", tache.DateDebut);
+            cmd.AddParameter("DateFin", tache.DateFin);
+            cmd.AddParameter("DateEcheance", tache.DateEcheance);
+            cmd.AddParameter("TachePartagee", tache.TachePartagee);
+            cmd.AddParameter("EstComplete", tache.EstComplete);
+            int newId = (int)_connection.ExecuteScalar(cmd);
+
+            tache.IdTache = newId;
+
+            return tache;
+
+        }
+        //{
+        //    SqlCommand cmd = ObjectCommand("CreateTache");
+        //    ConOpen();
+        //    using (var sqlcmd = _connection.ObjectCommand("CreateTache"))
+        //    {
+        //        sqlcmd.CommandType = CommandType.StoredProcedure;
+        //        sqlcmd.Parameters.AddWithValue("@NomTache", tache.NomTache);
+        //        sqlcmd.Parameters.AddWithValue("@Description", tache.Description);
+        //        sqlcmd.Parameters.AddWithValue("@DateCreation", tache.DateCreation);
+        //        sqlcmd.Parameters.AddWithValue("@DateDebut", tache.DateDebut);
+        //        sqlcmd.Parameters.AddWithValue("@DateFin", tache.DateFin);
+        //        sqlcmd.Parameters.AddWithValue("@DateEcheance", tache.DateEcheance);
+        //        sqlcmd.Parameters.AddWithValue("@EstComplete", tache.EstComplete);
+        //        sqlcmd.Parameters.AddWithValue("@EstPartagee", tache.TachePartagee);
+        //        sqlcmd.Parameters.AddWithValue("@IdAuteur", tache.Utilisateur);
+
+        //        int id = (int)sqlcmd.ExecuteScalar();
+        //        tache.IdTache = id;
+        //    }
+
+        //    ConClose();
+        //}
+
+        public Tache Complete(Tache tache)
         {
             throw new NotImplementedException();
         }
@@ -39,5 +83,32 @@ namespace RepTachesAPI.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+        //public Tache Create(Tache tache):
+        //{
+        //    _connection.ConOpen();
+        //    using (var sqlcmd = _connection.ObjectCommand("CreateTache"))
+        //    {
+        //        sqlcmd.CommandType = CommandType.StoredProcedure;
+        //        sqlcmd.Parameters.AddWithValue("@NomTache", tache.NomTache);
+        //        sqlcmd.Parameters.AddWithValue("@Description", tache.Description);
+        //        sqlcmd.Parameters.AddWithValue("@DateCreation", tache.DateCreation);
+        //        sqlcmd.Parameters.AddWithValue("@DateDebut", tache.DateDebut);
+        //        sqlcmd.Parameters.AddWithValue("@DateFin", tache.DateFin);
+        //        sqlcmd.Parameters.AddWithValue("@DateEcheance", tache.DateEcheance);
+        //        sqlcmd.Parameters.AddWithValue("@EstComplete", tache.EstComplete);
+        //        sqlcmd.Parameters.AddWithValue("@EstPartagee", tache.TachePartagee);
+        //        sqlcmd.Parameters.AddWithValue("@IdAuteur", tache.Utilisateur);
+
+        //        int id = (int)sqlcmd.ExecuteScalar();
+        //        tache.IdTache = id;
+        //    }
+        //    _connection.ConClose();
+        //    return tache;
+        //}
+
     }
+
+ 
+    
 }

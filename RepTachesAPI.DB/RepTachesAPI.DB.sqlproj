@@ -59,14 +59,21 @@
     <Folder Include="Stored Procedure" />
     <Folder Include="Table" />
     <Folder Include="Views" />
+    <Folder Include="Stored Procedure\Tache" />
+    <Folder Include="Stored Procedure\Utilisateur" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Table\Utilisateur_Tache.sql" />
     <Build Include="Table\Utilisateur.sql" />
-    <Build Include="Stored Procedure\SP_HashPassword.sql" />
     <Build Include="Views\V_Utilisateur.sql" />
     <Build Include="Views\V_TacheUtilisateur.sql" />
-    <Build Include="Views\V_TacheAdmin_RapportUtilisateur.sql" />
+    <Build Include="Views\V_AdminTache_RapportUtilisateurs.sql" />
+    <Build Include="Stored Procedure\Tache\CreateTache.sql" />
+    <Build Include="Stored Procedure\Tache\DeleteTache.sql" />
+    <Build Include="Stored Procedure\Tache\UpDateTache.sql" />
+    <Build Include="Stored Procedure\Utilisateur\SP_HashPassword.sql" />
+    <Build Include="Stored Procedure\Utilisateur\CreateUtilisateur.sql" />
+    <Build Include="Views\V_Admin_TachesEnCours.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Table\Tache.sql" />

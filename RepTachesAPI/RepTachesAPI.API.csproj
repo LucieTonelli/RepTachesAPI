@@ -15,10 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RepTachesAPI.BLL\RepTachesAPI.BLL.csproj" />
     <ProjectReference Include="..\RepTachesAPI.Domain\RepTachesAPI.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Mappers\" />
+    <ProjectReference Include="..\Tools\Tools.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RepTachesAPI.API.DTOs;
+using RepTachesAPI.API.Mappers;
 using RepTachesAPI.BLL.Interfaces;
-using System.Net.Sockets;
+using RepTachesAPI.Domain.Models;
+using Tools.CustomExceptions;
+using Tools.Errors;
 
 namespace RepTachesAPI.API.Controllers
 {
@@ -18,9 +22,52 @@ namespace RepTachesAPI.API.Controllers
             _userService = userService;
         }
 
+        [HttpPost]
+        [Authorize]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(TacheViewModelDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<TacheViewModelDTO> Insert([FromBody] TacheFormDTO ticket)
+        {
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
+           
+            Tache tacheToAdd = Tache.DTOToDomain();
 
+            if (utilisateur is not null)
+            {
+                tacheToAdd.Utilisateur = utilisateur;
+                TacheViewModelDTO tacheCreated = _tacheService.Create(tacheToAdd).DomainToInfoDTO();
+
+                return CreatedAtAction(nameof(Get), new { id = tacheCreated.IdTache }, tacheCreated);
+            }
+
+            return BadRequest();
+
+        }
+
+        [HttpGet("{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TacheViewModelDTO))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
+        public ActionResult<Tache> Get([FromRoute] int id)
+        {
+
+            try
+            {
+                Tache tache = _tacheService.GetById(IdTache);
+                return Ok(tache.DomainToInfoDTO());
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new ErrorResponse(StatusCodes.Status404NotFound, ex.Message));
+            }
+
+        }
 
     }
 }

@@ -15,7 +15,7 @@ namespace RepTachesAPI.BLL.Services
             throw new NotImplementedException();
         }
 
-        public bool Delete(int id)
+        public bool Delete(int IdUtilisateur)
         {
             throw new NotImplementedException();
         }
