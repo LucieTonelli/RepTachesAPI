@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[CreateUtilisateur]
+﻿CREATE PROCEDURE [dbo].[SP_CreateUtilisateur]
     @Statut INT,
     @Role VARCHAR,
 	@Username VARCHAR,

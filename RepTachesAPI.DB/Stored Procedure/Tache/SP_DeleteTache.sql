@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[DeleteTache]
+﻿CREATE PROCEDURE [dbo].[SP_DeleteTache]
     @IdTache INT
 AS
 BEGIN

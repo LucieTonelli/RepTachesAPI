@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[CreateTache]
+﻿CREATE PROCEDURE [dbo].[SP_CreateTache]
     @Statut INT,
     @NomTache NVARCHAR(50),
     @Recurrence NVARCHAR(50),
