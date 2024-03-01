@@ -73,7 +73,6 @@
     <Build Include="Stored Procedure\Tache\SP_UpDateTache.sql" />
     <Build Include="Stored Procedure\Utilisateur\SP_HashPassword.sql" />
     <Build Include="Stored Procedure\Utilisateur\SP_CreateUtilisateur.sql" />
-    <Build Include="Views\V_Admin_TachesEnCours.sql" />
     <Build Include="Stored Procedure\Utilisateur\SP_UpDateUtilisateur.sql" />
     <Build Include="Stored Procedure\Utilisateur\SP_DesactiverUtilisateur.sql" />
     <Build Include="Stored Procedure\Utilisateur\SP_Admin_TacheEnCoursUtilisateur.sql" />
