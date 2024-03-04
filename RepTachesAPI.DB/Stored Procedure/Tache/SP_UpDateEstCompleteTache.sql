@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[SP_UpdateEstComplete]
+﻿CREATE PROCEDURE [dbo].[SP_UpDateEstCompleteTache]
     @IdTache INT,
     @EstComplete BIT
 AS

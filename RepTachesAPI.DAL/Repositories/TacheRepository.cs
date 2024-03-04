@@ -29,10 +29,11 @@ namespace RepTachesAPI.DAL.Repositories
             cmd.AddParameter("DateEcheance", tache.DateEcheance);
             cmd.AddParameter("TachePartagee", tache.TachePartagee);
             cmd.AddParameter("EstComplete", tache.EstComplete);
+            // open
             int newId = (int)_connection.ExecuteScalar(cmd);
 
             tache.IdTache = newId;
-
+            // close
             return tache;
 
         }

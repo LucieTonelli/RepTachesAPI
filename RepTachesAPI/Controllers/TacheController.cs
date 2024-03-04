@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RepTachesAPI.API.DTOs;
+using RepTachesAPI.API.DTOs.TacheDTO;
 using RepTachesAPI.API.Mappers;
 using RepTachesAPI.BLL.Interfaces;
 using RepTachesAPI.Domain.Models;
@@ -27,26 +27,17 @@ namespace RepTachesAPI.API.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(TacheViewModelDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<TacheViewModelDTO> Insert([FromBody] TacheFormDTO ticket)
+        public ActionResult<TacheViewModelDTO> Insert([FromBody] TacheFormDTO tache)
         {
 
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-
            
-            Tache tacheToAdd = Tache.DTOToDomain();
-
-            if (utilisateur is not null)
-            {
-                tacheToAdd.Utilisateur = utilisateur;
-                TacheViewModelDTO tacheCreated = _tacheService.Create(tacheToAdd).DomainToInfoDTO();
-
-                return CreatedAtAction(nameof(Get), new { id = tacheCreated.IdTache }, tacheCreated);
-            }
-
-            return BadRequest();
+            Tache tacheToAdd = _tacheService.Create(tache.DTOToDomain());
+            
+            return CreatedAtAction(nameof(Get), new { id = tacheToAdd.IdTache }, tacheToAdd.DomainToInfoDTO());
 
         }
 
@@ -59,7 +50,7 @@ namespace RepTachesAPI.API.Controllers
 
             try
             {
-                Tache tache = _tacheService.GetById(IdTache);
+                Tache tache = _tacheService.GetById(id);
                 return Ok(tache.DomainToInfoDTO());
             }
             catch (NotFoundException ex)

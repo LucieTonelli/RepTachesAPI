@@ -70,12 +70,14 @@
     <Build Include="Views\V_AdminTache_RapportUtilisateurs.sql" />
     <Build Include="Stored Procedure\Tache\SP_CreateTache.sql" />
     <Build Include="Stored Procedure\Tache\SP_DeleteTache.sql" />
-    <Build Include="Stored Procedure\Tache\SP_UpDateTache.sql" />
+    <Build Include="Stored Procedure\Tache\SP_UpDateEstCompleteTache.sql" />
     <Build Include="Stored Procedure\Utilisateur\SP_HashPassword.sql" />
     <Build Include="Stored Procedure\Utilisateur\SP_CreateUtilisateur.sql" />
     <Build Include="Stored Procedure\Utilisateur\SP_UpDateUtilisateur.sql" />
     <Build Include="Stored Procedure\Utilisateur\SP_DesactiverUtilisateur.sql" />
     <Build Include="Stored Procedure\Utilisateur\SP_Admin_TacheEnCoursUtilisateur.sql" />
+    <Build Include="Stored Procedure\Tache\SP_UpDateUtilisateurTache.sql" />
+    <Build Include="Stored Procedure\Tache\SP_UpDatePriotiteTache.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Table\Tache.sql" />

@@ -53,11 +53,6 @@ namespace RepTachesAPI.BLL.Services
             return _repository.Create(tache);
         }
 
-        public Tache Create(Tache tache)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Delete(int id)
         {
             throw new NotImplementedException();

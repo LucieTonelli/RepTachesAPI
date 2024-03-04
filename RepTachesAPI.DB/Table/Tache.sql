@@ -7,7 +7,6 @@
     [Priorite] INT DEFAULT '1',
     [Description] VARCHAR(MAX),
     [DateCreation] DATETIME DEFAULT GetDate(),
-    [Delai] DATETIME,
     [DateDebut] DATETIME,
     [DateFin] DATETIME,
     [DateEcheance] DATETIME,

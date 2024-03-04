@@ -17,7 +17,7 @@ namespace RepTachesAPI.Domain.Models
         public int Statut { get; set; } = 1;
         public Enum Recurrence { get; set; } = RecurrenceTache.Non;
         public Enum Priorite { get; set; } = PrioriteTache.Faible;
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public DateTime DateCreation { get; set; } = DateTime.Now;
         public DateTime DateDebut { get; set; }
@@ -27,7 +27,7 @@ namespace RepTachesAPI.Domain.Models
         public bool TachePartagee { get; set; } = false;
         public bool EstComplete { get; set; } = false;
 
-        public List<Utilisateur> Utilisateur { get; set; }
+        public List<Utilisateur>? Utilisateur { get; set; }
 
     }
 

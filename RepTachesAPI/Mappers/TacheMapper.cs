@@ -1,4 +1,4 @@
-﻿using RepTachesAPI.API.DTOs;
+﻿using RepTachesAPI.API.DTOs.TacheDTO;
 using RepTachesAPI.Domain.Models;
 using System.Net.Sockets;
 
