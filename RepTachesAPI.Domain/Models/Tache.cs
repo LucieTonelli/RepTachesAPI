@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RepTachesAPI.Domain.Enums;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepTachesAPI.Domain.Models
 {
@@ -26,8 +27,11 @@ namespace RepTachesAPI.Domain.Models
         public DateTime DateEcheance { get; set; }
         public bool TachePartagee { get; set; } = false;
         public bool EstComplete { get; set; } = false;
-
         public List<Utilisateur>? Utilisateurs { get; set; }
+
+        [ForeignKey("IdUtilisateur")]
+        public int IdUtilisateur { get; set; }
+        
 
     }
 

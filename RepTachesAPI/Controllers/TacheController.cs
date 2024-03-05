@@ -39,7 +39,7 @@ namespace RepTachesAPI.API.Controllers
            
             Tache tacheToAdd = _tacheService.Create(tache.DTOToDomain());
             
-            return CreatedAtAction(nameof(tache), new { id = tacheToAdd.IdTache }, tacheToAdd.DomainToInfoDTO());
+            return CreatedAtAction(nameof(tacheToAdd), new { id = tacheToAdd.IdTache }, tacheToAdd.DomainToInfoDTO());
 
         }
 

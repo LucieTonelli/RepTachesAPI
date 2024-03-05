@@ -29,7 +29,7 @@ namespace RepTachesAPI.API.Mappers
                 Priorite = tache.Priorite,
                 Description = tache.Description!,
                 TachePartagee = tache.TachePartagee,
-                Utilisateurs = tache.Utilisateurs,
+                //Utilisateurs = tache.Utilisateurs,
 
 
             };

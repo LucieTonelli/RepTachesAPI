@@ -2,12 +2,13 @@
 using RepTachesAPI.DAL.Interfaces;
 using System.Data;
 using System.Data.SqlClient;
+using Tools.Errors;
 
 namespace RepTachesAPI.DAL.Repositories
 {
     public class TacheRepository : ITacheRepository
     {
-        public string ConnectionString { get; } = "Server=E6K-VDI20415\\TFTIC;Database=DbTicket;Trusted_Connection=True;TrustServerCertificate=True";
+        public string ConnectionString { get; } = "Server=E6K-VDI20415\\TFTIC;Database=RepTachesAPI.DB;Trusted_Connection=True;TrustServerCertificate=True";
 
 
         public Tache? AddUtilisateurs(int tacheId, List<int> utilisateurIds)
@@ -24,9 +25,22 @@ namespace RepTachesAPI.DAL.Repositories
 
                 connection.Open();
 
+                string checkQuery = "SELECT COUNT(*) FROM dbo.Tache WHERE NomTache = @NomTache";
+                using (SqlCommand checkCommand = new SqlCommand(checkQuery, connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@NomTache", tache.NomTache);
+                    int existingCount = (int)checkCommand.ExecuteScalar();
+                    if (existingCount > 0)
+                    {
+                        // La tâche existe déjà, vous pouvez gérer cela en conséquence
+                        // Par exemple, renvoyer une erreur ou effectuer une mise à jour au lieu d'une insertion
+                        // Ici, je vais simplement renvoyer null pour indiquer que la création de la tâche a échoué
+                        return null;
+                    }
+                }
                 using (SqlCommand sqlCommand = connection.CreateCommand())
                 {
-                    sqlCommand.CommandText = "dbo.SP_CreateTache";
+                    sqlCommand.CommandText = "[dbo].[SP_CreateTache]";
                     sqlCommand.CommandType = CommandType.StoredProcedure;
 
                     sqlCommand.Parameters.AddWithValue("@NomTache", tache.NomTache);
@@ -34,19 +48,11 @@ namespace RepTachesAPI.DAL.Repositories
                     sqlCommand.Parameters.AddWithValue("@Priorite", tache.Priorite);
                     sqlCommand.Parameters.AddWithValue("@Description", tache.Description);
                     sqlCommand.Parameters.AddWithValue("@TachePartagee", tache.TachePartagee);
+                    //sqlCommand.Parameters.AddWithValue("@Utilisateur", tache.IdUtilisateur);
 
-                    object result = sqlCommand.ExecuteScalar();
-
-                    if (result != null && int.TryParse(result.ToString(), out newId))
-                    {
-                        tache.IdTache = newId;
-                        return tache;
-                    }
-                    else
-                    {
-                        // Gérer le cas où la création de la tâche a échoué
-                        throw new Exception("Échec lors de la création de la tâche.");
-                    }
+                    newId = (int)sqlCommand.ExecuteScalar();
+                    tache.IdTache = newId;
+                    return tache;
                 }
             }
         }

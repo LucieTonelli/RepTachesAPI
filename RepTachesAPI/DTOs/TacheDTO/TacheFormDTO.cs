@@ -26,7 +26,7 @@ namespace RepTachesAPI.API.DTOs.TacheDTO
         [DefaultValue(false)]
         public bool TachePartagee { get; set; } = false;
 
-        List<Utilisateur>? Utilisateurs { get; set; }
+        //public Utilisateur IdUtilisateur { get; set; }
 
 
         //        var tache = new TacheFormDTO();
