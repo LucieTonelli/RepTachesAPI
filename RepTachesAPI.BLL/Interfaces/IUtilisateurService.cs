@@ -11,10 +11,10 @@ namespace RepTachesAPI.BLL.Interfaces
     {
         IEnumerable<Utilisateur> GetAll();
         Utilisateur? GetById(int id);
-        Utilisateur? GetByEmail(string email);
+        Utilisateur? RapportTache(int id);
         Utilisateur Create(Utilisateur Utilisateur);
         Utilisateur Update(Utilisateur Utilisateur);
         Utilisateur UpdateRole(Utilisateur utilisateur);
-        bool Delete(int id);
+        bool Desactiver(int id);
     }
 }

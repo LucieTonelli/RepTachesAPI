@@ -1,68 +1,54 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using RepTachesAPI.Domain.Models;
 using RepTachesAPI.DAL.Interfaces;
-using RepTachesAPI.DAL.Tools;
-using RepTachesAPI.Domain.Models;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace RepTachesAPI.DAL.Repositories
 {
     public class TacheRepository : ITacheRepository
     {
-        private readonly string _connectionString;
+        public string ConnectionString { get; } = "Server=E6K-VDI20415\\TFTIC;Database=DbTicket;Trusted_Connection=True;TrustServerCertificate=True";
 
-        private IConnection _connection;
-        public TacheRepository(IConfiguration config)
-        {
-            _connectionString = config.GetConnectionString("default");
-            _connection = new Connection(_connectionString);
-        }
 
-        public Tache? Create(Tache tache)
-        {
-            Command cmd = new Command("CreateTache", true);
-            cmd.AddParameter("NomTache", tache.NomTache);
-            cmd.AddParameter("Recurrence", tache.Recurrence);
-            cmd.AddParameter("Priorite", tache.Priorite);
-            cmd.AddParameter("Description", tache.Description);
-            cmd.AddParameter("DateCreation", tache.DateCreation);
-            cmd.AddParameter("DateDebut", tache.DateDebut);
-            cmd.AddParameter("DateFin", tache.DateFin);
-            cmd.AddParameter("DateEcheance", tache.DateEcheance);
-            cmd.AddParameter("TachePartagee", tache.TachePartagee);
-            cmd.AddParameter("EstComplete", tache.EstComplete);
-            // open
-            int newId = (int)_connection.ExecuteScalar(cmd);
-
-            tache.IdTache = newId;
-            // close
-            return tache;
-
-        }
-        //{
-        //    SqlCommand cmd = ObjectCommand("CreateTache");
-        //    ConOpen();
-        //    using (var sqlcmd = _connection.ObjectCommand("CreateTache"))
-        //    {
-        //        sqlcmd.CommandType = CommandType.StoredProcedure;
-        //        sqlcmd.Parameters.AddWithValue("@NomTache", tache.NomTache);
-        //        sqlcmd.Parameters.AddWithValue("@Description", tache.Description);
-        //        sqlcmd.Parameters.AddWithValue("@DateCreation", tache.DateCreation);
-        //        sqlcmd.Parameters.AddWithValue("@DateDebut", tache.DateDebut);
-        //        sqlcmd.Parameters.AddWithValue("@DateFin", tache.DateFin);
-        //        sqlcmd.Parameters.AddWithValue("@DateEcheance", tache.DateEcheance);
-        //        sqlcmd.Parameters.AddWithValue("@EstComplete", tache.EstComplete);
-        //        sqlcmd.Parameters.AddWithValue("@EstPartagee", tache.TachePartagee);
-        //        sqlcmd.Parameters.AddWithValue("@IdAuteur", tache.Utilisateur);
-
-        //        int id = (int)sqlcmd.ExecuteScalar();
-        //        tache.IdTache = id;
-        //    }
-
-        //    ConClose();
-        //}
-
-        public Tache Complete(Tache tache)
+        public Tache? AddUtilisateurs(int tacheId, List<int> utilisateurIds)
         {
             throw new NotImplementedException();
+        }
+
+        public Tache Create(Tache tache)
+        {
+            int newId = -1;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+
+                connection.Open();
+
+                using (SqlCommand sqlCommand = connection.CreateCommand())
+                {
+                    sqlCommand.CommandText = "dbo.SP_CreateTache";
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    sqlCommand.Parameters.AddWithValue("@NomTache", tache.NomTache);
+                    sqlCommand.Parameters.AddWithValue("@Recurrence", tache.Recurrence);
+                    sqlCommand.Parameters.AddWithValue("@Priorite", tache.Priorite);
+                    sqlCommand.Parameters.AddWithValue("@Description", tache.Description);
+                    sqlCommand.Parameters.AddWithValue("@TachePartagee", tache.TachePartagee);
+
+                    object result = sqlCommand.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out newId))
+                    {
+                        tache.IdTache = newId;
+                        return tache;
+                    }
+                    else
+                    {
+                        // Gérer le cas où la création de la tâche a échoué
+                        throw new Exception("Échec lors de la création de la tâche.");
+                    }
+                }
+            }
         }
 
         public bool Delete(int id)
@@ -85,31 +71,14 @@ namespace RepTachesAPI.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        //public Tache Create(Tache tache):
-        //{
-        //    _connection.ConOpen();
-        //    using (var sqlcmd = _connection.ObjectCommand("CreateTache"))
-        //    {
-        //        sqlcmd.CommandType = CommandType.StoredProcedure;
-        //        sqlcmd.Parameters.AddWithValue("@NomTache", tache.NomTache);
-        //        sqlcmd.Parameters.AddWithValue("@Description", tache.Description);
-        //        sqlcmd.Parameters.AddWithValue("@DateCreation", tache.DateCreation);
-        //        sqlcmd.Parameters.AddWithValue("@DateDebut", tache.DateDebut);
-        //        sqlcmd.Parameters.AddWithValue("@DateFin", tache.DateFin);
-        //        sqlcmd.Parameters.AddWithValue("@DateEcheance", tache.DateEcheance);
-        //        sqlcmd.Parameters.AddWithValue("@EstComplete", tache.EstComplete);
-        //        sqlcmd.Parameters.AddWithValue("@EstPartagee", tache.TachePartagee);
-        //        sqlcmd.Parameters.AddWithValue("@IdAuteur", tache.Utilisateur);
+        public Tache? UpdateComplete(Tache tache)
+        {
+            throw new NotImplementedException();
+        }
 
-        //        int id = (int)sqlcmd.ExecuteScalar();
-        //        tache.IdTache = id;
-        //    }
-        //    _connection.ConClose();
-        //    return tache;
-        //}
-
+        public Tache? UpdatePriorite(Tache tache)
+        {
+            throw new NotImplementedException();
+        }
     }
-
- 
-    
 }

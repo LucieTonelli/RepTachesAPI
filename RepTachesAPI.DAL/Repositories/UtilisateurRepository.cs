@@ -1,22 +1,18 @@
 ﻿using RepTachesAPI.DAL.Interfaces;
 using RepTachesAPI.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RepTachesAPI.DAL.Repositories
 {
     public class UtilisateurRepository : IUtilisateurRepository
 
     {
+        
         public Utilisateur Create(Utilisateur Utilisateur)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(int id)
+        public bool Desactiver(int id)
         {
             throw new NotImplementedException();
         }
@@ -26,12 +22,12 @@ namespace RepTachesAPI.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public Utilisateur? GetByEmail(string email)
+        public Utilisateur? GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Utilisateur? GetById(int id)
+        public Utilisateur? RapportTache(int id)
         {
             throw new NotImplementedException();
         }

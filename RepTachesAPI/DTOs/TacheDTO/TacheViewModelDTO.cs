@@ -15,7 +15,7 @@ namespace RepTachesAPI.API.DTOs.TacheDTO
 
         public DateTime DateEcheance { get; set; }
         public bool TachePartagee { get; set; } = false;
-        public List<Utilisateur> Utilisateur { get; set; }
+        public List<Utilisateur>? Utilisateurs { get; set; }
 
 
     }

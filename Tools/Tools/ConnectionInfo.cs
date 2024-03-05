@@ -1,20 +1,20 @@
-﻿using RepTachesAPI.DAL.Interfaces;
-using RepTachesAPI.DAL.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using RepTachesAPI.DAL.Interfaces;
+//using RepTachesAPI.DAL.Tools;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace RepTachesAPI.DAL.Tools
-{
-    public class ConnectionInfo : IConnectionInfo
-    {
-        private static readonly string _connectionString = "Server=E6K-VDI20415\\TFTIC;Database=DbTicket;Trusted_Connection=True;TrustServerCertificate=True";
+//namespace RepTachesAPI.DAL.Tools
+//{
+//    public class ConnectionInfo : IConnectionInfo
+//    {
+//        private static readonly string _connectionString = "Server=E6K-VDI20415\\TFTIC;Database=DbTicket;Trusted_Connection=True;TrustServerCertificate=True";
 
-        public string ConnectionString => _connectionString;
-    }
-}
+//        public string ConnectionString => _connectionString;
+//    }
+//}
 
 //dans l'app : 
 

@@ -21,13 +21,13 @@ namespace RepTachesAPI.Domain.Models
 
         public DateTime DateCreation { get; set; } = DateTime.Now;
         public DateTime DateDebut { get; set; }
-        public DateTime DateFin { get; set; }
+        public DateTime? DateFin { get; set; }
 
         public DateTime DateEcheance { get; set; }
         public bool TachePartagee { get; set; } = false;
         public bool EstComplete { get; set; } = false;
 
-        public List<Utilisateur>? Utilisateur { get; set; }
+        public List<Utilisateur>? Utilisateurs { get; set; }
 
     }
 

@@ -3,6 +3,8 @@ using RepTachesAPI.BLL.Services;
 using RepTachesAPI.DAL.Interfaces;
 using RepTachesAPI.DAL.Repositories;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,14 +13,20 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
+//Erreurs ici 
 builder.Services.AddScoped<ITacheRepository, TacheRepository>();
 builder.Services.AddScoped<ITacheService, TacheService>();
 builder.Services.AddScoped<IUtilisateurRepository, UtilisateurRepository>();
 builder.Services.AddScoped<IUtilisateurService, UtilisateurService>();
-
-
-
-
 
 var app = builder.Build();
 

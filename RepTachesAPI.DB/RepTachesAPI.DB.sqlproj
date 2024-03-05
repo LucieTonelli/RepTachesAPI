@@ -78,6 +78,9 @@
     <Build Include="Stored Procedure\Utilisateur\SP_Admin_TacheEnCoursUtilisateur.sql" />
     <Build Include="Stored Procedure\Tache\SP_UpDateUtilisateurTache.sql" />
     <Build Include="Stored Procedure\Tache\SP_UpDatePriotiteTache.sql" />
+    <Build Include="Stored Procedure\Utilisateur\SP_UpDateRoleUtilisateur.sql" />
+    <Build Include="Stored Procedure\Tache\SP_UpDateTache.sql" />
+    <Build Include="Stored Procedure\Tache\SP_CalculDateEcheance.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Table\Tache.sql" />

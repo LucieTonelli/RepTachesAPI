@@ -1,123 +1,122 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.IdentityModel.Protocols;
-using RepTachesAPI.DAL.Interfaces;
-using System.Data;
-using System.Data.Common;
+﻿//using RepTachesAPI.Tools.Interfaces;
+//using System.Data;
+//using System.Data.Common;
+//using System.Data.SqlClient;
 
-namespace RepTachesAPI.DAL.Tools
-{
-    public class Connection : IConnection
-    {
+//namespace RepTachesAPI.Tools.Tools
+//{
+//    public class Connection : IConnection
+//    {
      
-        private readonly string ConnectionString;
+//        private readonly string ConnectionString;
 
-        public Connection(string connectionString)
-        {
-            ConnectionString = connectionString;
-        }
+//        public Connection(string connectionString)
+//        {
+//            ConnectionString = connectionString;
+//        }
 
-        public int ExecuteNonQuery(Command command)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(command.Query, connection))
-                {
-                    sqlCommand.CommandType = command.IsStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
-                    foreach (var parameter in command.Parameters)
-                    {
-                        sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value.Value ?? DBNull.Value).Direction = parameter.Value.Direction;
-                    }
-                    return sqlCommand.ExecuteNonQuery();
-                }
-            }
-        }
+//        public int ExecuteNonQuery(Command command)
+//        {
+//            using (SqlConnection connection = new SqlConnection(ConnectionString))
+//            {
+//                connection.Open();
+//                using (SqlCommand sqlCommand = new SqlCommand(command.Query, connection))
+//                {
+//                    sqlCommand.CommandType = command.IsStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
+//                    foreach (var parameter in command.Parameters)
+//                    {
+//                        sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value.Value ?? DBNull.Value).Direction = parameter.Value.Direction;
+//                    }
+//                    return sqlCommand.ExecuteNonQuery();
+//                }
+//            }
+//        }
 
-        public IEnumerable<TResult> ExecuteReader<TResult>(Command command, Func<IDataRecord, TResult> selector)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(command.Query, connection))
-                {
-                    sqlCommand.CommandType = command.IsStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
-                    foreach (var parameter in command.Parameters)
-                    {
-                        sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value.Value ?? DBNull.Value).Direction = parameter.Value.Direction;
-                    }
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            yield return selector(reader);
-                        }
-                    }
-                }
-            }
-        }
+//        public IEnumerable<TResult> ExecuteReader<TResult>(Command command, Func<IDataRecord, TResult> selector)
+//        {
+//            using (SqlConnection connection = new SqlConnection(ConnectionString))
+//            {
+//                connection.Open();
+//                using (SqlCommand sqlCommand = new SqlCommand(command.Query, connection))
+//                {
+//                    sqlCommand.CommandType = command.IsStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
+//                    foreach (var parameter in command.Parameters)
+//                    {
+//                        sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value.Value ?? DBNull.Value).Direction = parameter.Value.Direction;
+//                    }
+//                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+//                    {
+//                        while (reader.Read())
+//                        {
+//                            yield return selector(reader);
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
-        public object ExecuteScalar(Command command)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(command.Query, connection))
-                {
-                    sqlCommand.CommandType = command.IsStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
-                    foreach (var parameter in command.Parameters)
-                    {
-                        sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value.Value ?? DBNull.Value).Direction = parameter.Value.Direction;
-                    }
-                    return sqlCommand.ExecuteScalar();
-                }
-            }
-        }
+//        public object ExecuteScalar(Command command)
+//        {
+//            using (SqlConnection connection = new SqlConnection(ConnectionString))
+//            {
+//                connection.Open();
+//                using (SqlCommand sqlCommand = new SqlCommand(command.Query, connection))
+//                {
+//                    sqlCommand.CommandType = command.IsStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
+//                    foreach (var parameter in command.Parameters)
+//                    {
+//                        sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value.Value ?? DBNull.Value).Direction = parameter.Value.Direction;
+//                    }
+//                    return sqlCommand.ExecuteScalar();
+//                }
+//            }
+//        }
 
-        public DataSet GetDataSet(Command command)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(command.Query, connection))
-                {
-                    sqlCommand.CommandType = command.IsStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
-                    foreach (var parameter in command.Parameters)
-                    {
-                        sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value.Value ?? DBNull.Value).Direction = parameter.Value.Direction;
-                    }
-                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand))
-                    {
-                        DataSet dataSet = new DataSet();
-                        dataAdapter.Fill(dataSet);
-                        return dataSet;
-                    }
-                }
-            }
-        }
+//        public DataSet GetDataSet(Command command)
+//        {
+//            using (SqlConnection connection = new SqlConnection(ConnectionString))
+//            {
+//                connection.Open();
+//                using (SqlCommand sqlCommand = new SqlCommand(command.Query, connection))
+//                {
+//                    sqlCommand.CommandType = command.IsStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
+//                    foreach (var parameter in command.Parameters)
+//                    {
+//                        sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value.Value ?? DBNull.Value).Direction = parameter.Value.Direction;
+//                    }
+//                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand))
+//                    {
+//                        DataSet dataSet = new DataSet();
+//                        dataAdapter.Fill(dataSet);
+//                        return dataSet;
+//                    }
+//                }
+//            }
+//        }
 
-        public DataTable GetDataTable(Command command)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(command.Query, connection))
-                {
-                    sqlCommand.CommandType = command.IsStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
-                    foreach (var parameter in command.Parameters)
-                    {
-                        sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value.Value ?? DBNull.Value).Direction = parameter.Value.Direction;
-                    }
-                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand))
-                    {
-                        DataTable dataTable = new DataTable();
-                        dataAdapter.Fill(dataTable);
-                        return dataTable;
-                    }
-                }
-            }
-        }
-    }
-}
+//        public DataTable GetDataTable(Command command)
+//        {
+//            using (SqlConnection connection = new SqlConnection(ConnectionString))
+//            {
+//                connection.Open();
+//                using (SqlCommand sqlCommand = new SqlCommand(command.Query, connection))
+//                {
+//                    sqlCommand.CommandType = command.IsStoredProcedure ? CommandType.StoredProcedure : CommandType.Text;
+//                    foreach (var parameter in command.Parameters)
+//                    {
+//                        sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value.Value ?? DBNull.Value).Direction = parameter.Value.Direction;
+//                    }
+//                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand))
+//                    {
+//                        DataTable dataTable = new DataTable();
+//                        dataAdapter.Fill(dataTable);
+//                        return dataTable;
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 

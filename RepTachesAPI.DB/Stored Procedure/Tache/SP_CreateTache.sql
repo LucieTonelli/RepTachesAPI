@@ -1,18 +1,17 @@
 ﻿CREATE PROCEDURE [dbo].[SP_CreateTache]
-    @Statut INT,
-    @NomTache NVARCHAR(50),
-    @Recurrence NVARCHAR(50),
-    @Priorite INT,
-    @Description NVARCHAR(255),
-    @DateCreation DATETIME,
-    @DateDebut DATETIME,
-    @DateFin DATETIME,
-    @DateEcheance DATETIME,
-    @TachePartagee BIT,
-    @EstComplete BIT
+    @NomTache varchar(50),
+    @Recurrence varchar(50),
+    @Priorite int,
+    @Description varchar(max),
+    @TachePartagee bit
+    
 AS
 BEGIN
-    INSERT INTO Tache (Statut, NomTache, Recurrence, Priorite, Description, DateCreation, DateDebut, DateFin, DateEcheance, TachePartagee, EstComplete)
-    VALUES (@Statut, @NomTache, @Recurrence, @Priorite, @Description, @DateCreation, @DateDebut, @DateFin, @DateEcheance, @TachePartagee, @EstComplete);
-    SELECT SCOPE_IDENTITY() AS IdTache;
+
+    INSERT INTO Tache (NomTache, Recurrence, Priorite, Description, TachePartagee)
+    VALUES (@NomTache, @Recurrence, @Priorite, @Description, @TachePartagee);
+    DECLARE @NewId int
+    SET @NewId = SCOPE_IDENTITY()
+    SELECT @NewId AS NewId
 END
+

@@ -10,37 +10,37 @@ namespace RepTachesAPI.BLL.Services
 {
     public class UtilisateurService : IUtilisateurService
     {
-        public Utilisateur Create(Utilisateur Utilisateur)
+        Utilisateur IUtilisateurService.Create(Utilisateur Utilisateur)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(int IdUtilisateur)
+        bool IUtilisateurService.Desactiver(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Utilisateur> GetAll()
+        IEnumerable<Utilisateur> IUtilisateurService.GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Utilisateur? GetByEmail(string email)
+        Utilisateur? IUtilisateurService.GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Utilisateur? GetById(int id)
+        Utilisateur? IUtilisateurService.RapportTache(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Utilisateur Update(Utilisateur Utilisateur)
+        Utilisateur IUtilisateurService.Update(Utilisateur Utilisateur)
         {
             throw new NotImplementedException();
         }
 
-        public Utilisateur UpdateRole(Utilisateur utilisateur)
+        Utilisateur IUtilisateurService.UpdateRole(Utilisateur utilisateur)
         {
             throw new NotImplementedException();
         }

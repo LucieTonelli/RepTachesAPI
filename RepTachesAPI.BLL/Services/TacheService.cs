@@ -1,82 +1,58 @@
-﻿using Microsoft.Extensions.Configuration;
-using RepTachesAPI.BLL.Interfaces;
+﻿using RepTachesAPI.BLL.Interfaces;
 using RepTachesAPI.DAL.Interfaces;
-using RepTachesAPI.DAL.Tools;
 using RepTachesAPI.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using Tools.CustomExceptions;
 
 namespace RepTachesAPI.BLL.Services
 {
     public class TacheService : ITacheService
     {
-        private readonly ITacheRepository _repository;
-        private IConnection _connection;
 
+        private readonly ITacheRepository _repository;
 
         public TacheService(ITacheRepository repository)
         {
             _repository = repository;
         }
 
-        public Tache? Complete(int IdTache)
+        Tache? ITacheService.AddUtilisateurs(int tacheId, List<int> utilisateurIds)
         {
-            Tache? tacheToUpdate = _repository.GetById(IdTache);
-            if (tacheToUpdate is null)
-            {
-                throw new NotFoundException($"Le ticket {IdTache} n'a pas été trouvé");
-            }
-
-            tacheToUpdate.DateFin = DateTime.Now;
-            tacheToUpdate.EstComplete = true;
-
-            return _repository.Complete(tacheToUpdate);
+            throw new NotImplementedException();
         }
 
-        public Tache Create(Tache tache)
+        Tache ITacheService.Create(Tache tache)
         {
             return _repository.Create(tache);
         }
 
-
-
-
-
-
-        public Tache? Complete(Tache tache)
+        bool ITacheService.Delete(int id)
         {
-            return _repository.Create(tache);
+            return _repository.Delete(id);
         }
 
-        public bool Delete(int id)
+        IEnumerable<Tache> ITacheService.GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Tache> GetAll()
+        Tache? ITacheService.GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-
-        public Tache GetById(object idTache)
+        Tache? ITacheService.Update(Tache tache)
         {
             throw new NotImplementedException();
         }
 
-        public Tache? GetById(int id)
+        Tache? ITacheService.UpdateComplete(Tache tache)
         {
             throw new NotImplementedException();
         }
 
-        public Tache? Update(Tache tache)
+        Tache? ITacheService.UpdatePriorite(Tache tache)
         {
             throw new NotImplementedException();
         }
+
     }
 }

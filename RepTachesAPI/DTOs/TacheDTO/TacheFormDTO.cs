@@ -1,4 +1,5 @@
 ﻿using RepTachesAPI.Domain.Enums;
+using RepTachesAPI.Domain.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -15,17 +16,24 @@ namespace RepTachesAPI.API.DTOs.TacheDTO
         public string? Description { get; set; }
 
 
-        public Enum Recurrence { get; set; } = RecurrenceTache.Non;
-        public Enum Priorite { get; set; } = PrioriteTache.Moyenne;
-
-        public DateTime DateEcheance { get; set; }
+        public RecurrenceTache Recurrence { get; set; } = RecurrenceTache.Non;
+        public PrioriteTache Priorite { get; set; } = PrioriteTache.Moyenne;
+        
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //public DateTime DateEcheance { get; set; }
 
         [DefaultValue(false)]
         public bool TachePartagee { get; set; } = false;
 
-        public string? Utilisateur { get; set; }
-    }
+        List<Utilisateur>? Utilisateurs { get; set; }
 
+
+        //        var tache = new TacheFormDTO();
+        //        tache.Utilisateurs.Add("Utilisateur1");
+        //tache.Utilisateurs.Add("Utilisateur2");
+        //tache.Utilisateurs.Remove("Utilisateur2");
+    }
 
 }
 

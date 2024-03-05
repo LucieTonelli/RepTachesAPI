@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RepTachesAPI.API.DTOs.TacheDTO;
 using RepTachesAPI.API.Mappers;
 using RepTachesAPI.BLL.Interfaces;
+using RepTachesAPI.BLL.Services;
 using RepTachesAPI.Domain.Models;
 using Tools.CustomExceptions;
 using Tools.Errors;
@@ -15,6 +16,7 @@ namespace RepTachesAPI.API.Controllers
     {
         private readonly ITacheService _tacheService;
         private readonly IUtilisateurService _userService;
+        private object _utilisateurService;
 
         public TacheController(ITacheService tacheService, IUtilisateurService userService)
         {
@@ -23,7 +25,7 @@ namespace RepTachesAPI.API.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(TacheViewModelDTO))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -37,28 +39,48 @@ namespace RepTachesAPI.API.Controllers
            
             Tache tacheToAdd = _tacheService.Create(tache.DTOToDomain());
             
-            return CreatedAtAction(nameof(Get), new { id = tacheToAdd.IdTache }, tacheToAdd.DomainToInfoDTO());
+            return CreatedAtAction(nameof(tache), new { id = tacheToAdd.IdTache }, tacheToAdd.DomainToInfoDTO());
 
         }
 
-        [HttpGet("{id}")]
-        [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TacheViewModelDTO))]
-        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
-        public ActionResult<Tache> Get([FromRoute] int id)
-        {
+        //[HttpGet("{id}")]
+        //[Produces("application/json")]
+        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TacheViewModelDTO))]
+        //[ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
+        //public ActionResult<Tache> Get([FromRoute] int id)
+        //{
 
-            try
-            {
-                Tache tache = _tacheService.GetById(id);
-                return Ok(tache.DomainToInfoDTO());
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(new ErrorResponse(StatusCodes.Status404NotFound, ex.Message));
-            }
+        //    try
+        //    {
+        //        Tache tache = _tacheService.GetById(id);
+        //        return Ok(tache.DomainToInfoDTO());
+        //    }
+        //    catch (NotFoundException ex)
+        //    {
+        //        return NotFound(new ErrorResponse(StatusCodes.Status404NotFound, ex.Message));
+        //    }
 
-        }
+        //}
+
+
+        //public Tache? AddUtilisateurs(int tacheId, List<int> utilisateurIds)
+        //{
+        //    Tache tache = GetById(tacheId);
+        //    if (tache == null)
+        //    {
+        //        return null;
+        //    }
+
+        //    foreach (Utilisateur utilisateurId in utilisateurIds)
+        //    {
+
+        //        Utilisateur utilisateur = _utilisateurService.GetById(utilisateurId);
+
+        //        tache.Utilisateurs.Add(utilisateur);
+        //    }
+
+        //    return Ok(tache.DomainToInfoDTO());
+        //}
 
     }
 }

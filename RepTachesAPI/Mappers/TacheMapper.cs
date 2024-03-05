@@ -1,5 +1,6 @@
 ﻿using RepTachesAPI.API.DTOs.TacheDTO;
 using RepTachesAPI.Domain.Models;
+using System.Collections.Generic;
 using System.Net.Sockets;
 
 
@@ -26,15 +27,13 @@ namespace RepTachesAPI.API.Mappers
                 NomTache = tache.NomTache,
                 Recurrence = tache.Recurrence,
                 Priorite = tache.Priorite,
-                Description = tache.Description,
-                DateDebut = tache.DateDebut,
-                DateFin = tache.DateFin,
-                DateEcheance = tache.DateEcheance,
+                Description = tache.Description!,
                 TachePartagee = tache.TachePartagee,
-                Utilisateur = tache.Utilisateur,
+                Utilisateurs = tache.Utilisateurs,
+
 
             };
-        }
+         }
 
     };
         
