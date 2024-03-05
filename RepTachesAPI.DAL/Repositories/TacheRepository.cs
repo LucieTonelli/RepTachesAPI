@@ -32,9 +32,6 @@ namespace RepTachesAPI.DAL.Repositories
                     int existingCount = (int)checkCommand.ExecuteScalar();
                     if (existingCount > 0)
                     {
-                        // La tâche existe déjà, vous pouvez gérer cela en conséquence
-                        // Par exemple, renvoyer une erreur ou effectuer une mise à jour au lieu d'une insertion
-                        // Ici, je vais simplement renvoyer null pour indiquer que la création de la tâche a échoué
                         return null;
                     }
                 }
@@ -52,8 +49,22 @@ namespace RepTachesAPI.DAL.Repositories
 
                     newId = (int)sqlCommand.ExecuteScalar();
                     tache.IdTache = newId;
-                    return tache;
+
                 }
+
+                using (SqlCommand sqlCommand = connection.CreateCommand())
+                {
+                    sqlCommand.CommandText = "[dbo].[SP_CalculDateEcheance]";
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    sqlCommand.Parameters.AddWithValue("@DateCreation", DateTime.Now); 
+                    sqlCommand.Parameters.AddWithValue("@Priorite", tache.Priorite);
+                    sqlCommand.Parameters.AddWithValue("@IdTache", newId);
+
+                    sqlCommand.ExecuteNonQuery();
+                }
+
+                return tache;
             }
         }
 
